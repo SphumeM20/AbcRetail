@@ -1,0 +1,42 @@
+@model OrderViewModel
+@{
+    ViewData["Title"] = "Create Order";
+    var customers = ViewBag.Customers as List<Customer> ?? new List<Customer>();
+    var products = ViewBag.Products as List<Product> ?? new List<Product>();
+}
+
+<h1>Create Order</h1>
+<p class="text-muted">Submitting this form sends an order message to Azure Queue Storage.</p>
+
+<form asp-action="Create" method="post">
+    <div asp-validation-summary="All" class="text-danger mb-3"></div>
+
+    <div class="mb-3">
+        <label class="form-label">Customer</label>
+        <select asp-for="CustomerId" class="form-select">
+            <option value="">-- Select Customer --</option>
+            @foreach (var customer in customers)
+            {
+                <option value="@customer.CustomerId">@customer.CustomerId - @customer.Name</option>
+            }
+        </select>
+    </div>
+
+    <div class="mb-3">
+        <label class="form-label">Product</label>
+        <select asp-for="ProductId" class="form-select">
+            <option value="">-- Select Product --</option>
+            @foreach (var product in products)
+            {
+                <option value="@product.ProductId">@product.ProductId - @product.Name</option>
+            }
+        </select>
+    </div>
+
+    <div class="mb-3">
+        <label class="form-label">Quantity</label>
+        <input asp-for="Quantity" class="form-control" type="number" min="1" />
+    </div>
+
+    <button class="btn btn-primary" type="submit">Process Order</button>
+</form>

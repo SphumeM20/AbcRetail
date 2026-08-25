@@ -1,0 +1,49 @@
+@{
+    ViewData["Title"] = "Home";
+}
+
+<div class="p-5 mb-4 bg-light rounded-3">
+    <div class="container-fluid py-3">
+        <h1 class="display-5 fw-bold">ABC Retail Azure Storage Solution</h1>
+        <p class="lead">Simple demonstration of Azure Tables, Blob Storage, Queue Storage and Azure Files.</p>
+    </div>
+</div>
+
+<div class="row g-3">
+    <div class="col-md-3"><div class="card stat-card"><div class="card-body"><h2>@ViewBag.CustomerCount</h2><p>Customers</p></div></div></div>
+    <div class="col-md-3"><div class="card stat-card"><div class="card-body"><h2>@ViewBag.ProductCount</h2><p>Products</p></div></div></div>
+    <div class="col-md-3"><div class="card stat-card"><div class="card-body"><h2>@ViewBag.ImageCount</h2><p>Images</p></div></div></div>
+    <div class="col-md-3"><div class="card stat-card"><div class="card-body"><h2>@ViewBag.QueueCount</h2><p>Queues</p></div></div></div>
+</div>
+
+<div class="row mt-4 g-3">
+    <div class="col-md-6">
+        <div class="card h-100"><div class="card-body">
+            <h4>Azure Table Storage</h4>
+            <p>Customer profiles and product information.</p>
+            <a asp-controller="Customers" asp-action="Index" class="btn btn-outline-primary">View Customers</a>
+            <a asp-controller="Products" asp-action="Index" class="btn btn-outline-primary">View Products</a>
+        </div></div>
+    </div>
+    <div class="col-md-6">
+        <div class="card h-100"><div class="card-body">
+            <h4>Azure Blob Storage</h4>
+            <p>Product images and multimedia content.</p>
+            <a asp-controller="Products" asp-action="Index" class="btn btn-outline-primary">View Products & Images</a>
+        </div></div>
+    </div>
+    <div class="col-md-6">
+        <div class="card h-100"><div class="card-body">
+            <h4>Azure Queue Storage</h4>
+            <p>Order processing messages.</p>
+            <a asp-controller="Orders" asp-action="Create" class="btn btn-outline-primary">Create Order</a>
+        </div></div>
+    </div>
+    <div class="col-md-6">
+        <div class="card h-100"><div class="card-body">
+            <h4>Azure Files</h4>
+            <p>Application log file storage.</p>
+            <p class="mb-0">The application writes important actions to application-log.txt.</p>
+        </div></div>
+    </div>
+</div>

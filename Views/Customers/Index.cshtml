@@ -1,0 +1,29 @@
+@model IEnumerable<Customer>
+@{
+    ViewData["Title"] = "Customers";
+}
+
+<div class="d-flex justify-content-between align-items-center mb-3">
+    <h1>Customers - Azure Tables</h1>
+    <a asp-action="Create" class="btn btn-primary">Add Customer</a>
+</div>
+
+@if (ViewBag.Error != null)
+{
+    <div class="alert alert-danger">@ViewBag.Error</div>
+}
+
+<table class="table table-striped table-bordered">
+    <thead><tr><th>Customer ID</th><th>Name</th><th>Email</th><th>Phone</th></tr></thead>
+    <tbody>
+    @foreach (var customer in Model)
+    {
+        <tr>
+            <td>@customer.CustomerId</td>
+            <td>@customer.Name</td>
+            <td>@customer.Email</td>
+            <td>@customer.Phone</td>
+        </tr>
+    }
+    </tbody>
+</table>

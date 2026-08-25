@@ -1,0 +1,111 @@
+@model IEnumerable<Product>
+
+@{
+    ViewData["Title"] = "Products";
+}
+
+<div class="d-flex justify-content-between align-items-center mb-4">
+
+    <div>
+        <h1>Products</h1>
+
+        <p class="text-muted mb-0">
+            Products are stored in Azure Table Storage.
+            Images are stored in Azure Blob Storage.
+        </p>
+    </div>
+
+    <a asp-action="Create"
+       class="btn btn-primary">
+        + Add Product
+    </a>
+
+</div>
+
+@if (ViewBag.Error != null)
+{
+    <div class="alert alert-danger">
+        @ViewBag.Error
+    </div>
+}
+
+@if (!Model.Any())
+{
+    <div class="alert alert-info">
+        No products have been added yet.
+    </div>
+}
+else
+{
+    <div class="row g-4">
+
+        @foreach (var product in Model)
+        {
+            <div class="col-md-4">
+
+                <div class="card h-100 shadow-sm">
+
+                    @if (!string.IsNullOrWhiteSpace(product.ImageName))
+                    {
+                        <img src="@Url.Action("Image", "Products", new { fileName = product.ImageName })"
+                             class="card-img-top product-image"
+                             alt="@product.Name" />
+                    }
+                    else
+                    {
+                        <div class="no-image">
+                            No Image
+                        </div>
+                    }
+
+                    <div class="card-body">
+
+                        <h4 class="card-title">
+                            @product.Name
+                        </h4>
+
+                        <p class="text-muted">
+                            Product ID:
+                            <strong>@product.ProductId</strong>
+                        </p>
+
+                        <p>
+                            @product.Description
+                        </p>
+
+                        <h5 class="text-primary">
+                            R @product.Price.ToString("N2")
+                        </h5>
+
+                        @if (!string.IsNullOrWhiteSpace(product.ImageName))
+                        {
+                            <p class="small text-muted">
+                                Image:
+                                @product.ImageName
+                            </p>
+
+                            <div class="d-flex gap-2">
+
+                                <a href="@Url.Action("Image", "Products", new { fileName = product.ImageName })"
+                                   target="_blank"
+                                   class="btn btn-outline-primary btn-sm">
+                                    View Image
+                                </a>
+
+                                <a href="@Url.Action("DownloadImage", "Products", new { fileName = product.ImageName })"
+                                   class="btn btn-outline-success btn-sm">
+                                    Download
+                                </a>
+
+                            </div>
+                        }
+
+                    </div>
+
+                </div>
+
+            </div>
+        }
+
+    </div>
+}
